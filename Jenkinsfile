@@ -69,7 +69,7 @@ pipeline{
             steps{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                       sh 'docker run -d --name zomato -p 4545:45 jinesh1893/zomato:latest'
+                       sh 'docker run -d --name zomato -p 4500:4500 jinesh1893/zomato:latest'
                     }
                 }
             }
