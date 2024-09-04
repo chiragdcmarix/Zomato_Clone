@@ -15,7 +15,7 @@ pipeline{
         }
         stage('Checkout from Git'){
             steps{
-                git branch: 'main', url: 'https://github.com/jay75chauhan/Zomato-Clone'
+                git branch: 'main', url: 'https://github.com/chiragdcmarix/Zomato_Clone.git'
             }
         }
         stage("Sonarqube Analysis "){
@@ -54,22 +54,22 @@ pipeline{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
                        sh "docker build -t zomato ."
-                       sh "docker tag zomato jay75chauhan/zomato:latest "
-                       sh "docker push jay75chauhan/zomato:latest "
+                       sh "docker tag zomato jinesh1893/zomato:latest "
+                       sh "docker push jinesh1893/zomato:latest "
                     }
                 }
             }
         }
         stage("TRIVY"){
             steps{
-                sh "trivy image jay75chauhan/zomato:latest > trivy.txt"
+                sh "trivy image jinesh1893/zomato:latest > trivy.txt"
             }
         }
         stage('Deploy to container'){
             steps{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                       sh 'docker run -d --name zomato -p 3000:3000 jay75chauhan/zomato:latest'
+                       sh 'docker run -d --name zomato -p 4545:45 jinesh1893/zomato:latest'
                     }
                 }
             }
